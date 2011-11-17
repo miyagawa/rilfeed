@@ -1,0 +1,5 @@
+dotcloud rilfeed
+dotcloud push rilfeed
+dotcloud var set rilfeed RIL_APIKEY=... RIL_USERNAME=... RIL_PASSWORD=...
+
+Access http://rilfeed-YOURNAME.dotcloud.com/rss
