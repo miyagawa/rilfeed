@@ -1,4 +1,6 @@
-dotcloud rilfeed
+git clone git://github.com/miyagawa/rilfeed.git
+cd rilfeed
+dotcloud create rilfeed
 dotcloud push rilfeed
 dotcloud var set rilfeed RIL_APIKEY=... RIL_USERNAME=... RIL_PASSWORD=...
 
