@@ -74,6 +74,7 @@ sub serve_rss {
         }
 
         $html =~ s/&#(\d+);/chr($1)/eg;
+        $html =~ s!</\w+$!!; # RIL API bug
 
         my $dt = DateTime->from_epoch(epoch => $item->{time_added});
 
