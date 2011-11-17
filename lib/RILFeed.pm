@@ -9,7 +9,7 @@ use DateTime::Format::Mail;
 use Encode;
 use WebService::Simple;
 
-my $cache = App::Cache->new;
+my $cache = App::Cache->new({ ttl => 7 * 24 * 60 * 60 });
 my $format = DateTime::Format::Mail->new;
 
 my $apikey = $ENV{RIL_APIKEY};
