@@ -1,5 +1,6 @@
 package RILFeed;
 use strict;
+use warnings;
 use LWP::Simple;
 use URI;
 use XML::RSS;
@@ -73,6 +74,8 @@ sub serve_rss {
             $html = LWP::Simple::get($uri);
             $cache->set($id => $html);
         }
+
+        $html ||= '(Read It Later could not fetch the article)';
 
         $html =~ s/&#(\d+);/chr($1)/eg;
         $html =~ s!</\w+$!!; # RIL API bug
