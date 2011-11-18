@@ -56,6 +56,7 @@ sub serve_rss {
         username => $ENV{RIL_USERNAME},
         password => $ENV{RIL_PASSWORD},
         state => 'unread',
+        since => time - 60 * 60 * 24,
     })->parse_response;
 
     for my $id (sort { $b <=> $a } keys %{$res->{list}}) {
