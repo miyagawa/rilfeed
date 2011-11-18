@@ -4,11 +4,13 @@ use LWP::Simple;
 use URI;
 use XML::RSS;
 use App::Cache;
+use DateTime;
+use DateTime::Format::Mail;
 use Encode;
 use WebService::Simple;
-use Time::Piece ();
 
 my $cache = App::Cache->new({ ttl => 7 * 24 * 60 * 60 });
+my $format = DateTime::Format::Mail->new;
 
 my $apikey = $ENV{RIL_APIKEY};
 
@@ -75,15 +77,14 @@ sub serve_rss {
         $html =~ s/&#(\d+);/chr($1)/eg;
         $html =~ s!</\w+$!!; # RIL API bug
 
-        my $time = Time::Piece::gmtime($item->{time_added})->strftime;
-        $time =~ s/UTC/-0000/;
+        my $dt = DateTime->from_epoch(epoch => $item->{time_added});
 
         $feed->add_item(
             title => $item->{title},
             link => $item->{url},
             permaLink => $item->{url},
             content => { encoded => $html },
-            pubDate => $time,
+            pubDate => $format->format_datetime($dt),
         );
     }
 
